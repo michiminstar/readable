@@ -5,6 +5,7 @@ import { withStyles } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
+import Button from 'material-ui/Button'
 
 const styles = theme => ({
   root: {
@@ -12,7 +13,14 @@ const styles = theme => ({
   },
   title: {
     color: 'rgb(2, 204, 186)',
-  }
+  },
+  flex: {
+    flex: 1,
+  },
+  button: {
+    margin: theme.spacing.unit,
+    float: 'right',
+  },
 })
 
 function Header(props) {
@@ -21,15 +29,20 @@ function Header(props) {
 
   return (
     <div className={classes.root}>
-      <Link to="/">
-        <AppBar position="static" color="default" className={classes.title}>
-          <Toolbar>
-            <Typography type="title" color="inherit">
+      <AppBar position="static" color="default">
+        <Toolbar>
+          <Link className={classes.flex} to="/">
+            <Typography type="title" >
               Readable
             </Typography>
-          </Toolbar>
-        </AppBar>
-      </Link>
+          </Link>
+          <Link className={classes.button} to="/new">
+            <Button color="accent">
+              New Post
+            </Button>
+          </Link>
+        </Toolbar>
+      </AppBar>
     </div>
   )
 }

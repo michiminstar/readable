@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Link, Switch } from 'react-router-dom'
-import Header from './Header'
+import Header from './layout/Header'
 import Home from './Home'
 
 class App extends Component {
