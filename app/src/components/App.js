@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
-import { Route, Link, Switch } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { getCategories } from '../actions'
 import Header from './layout/Header'
 import Home from './Home'
 
 class App extends Component {
+  componentDidMount() {
+    this.props.getCategories()
+  }
+
   render() {
     return (
       <div className="app">
@@ -17,4 +23,6 @@ class App extends Component {
   }
 }
 
-export default App
+export default withRouter(connect(null, {
+  getCategories
+})(App))
