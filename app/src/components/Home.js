@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-import CategoryTab from './CategoryTabs'
+import { connect } from 'react-redux'
+
+import CategoryButtons from './CategoryButtons'
+
 
 class Home extends Component {
   render() {
     return (
       <div>
-        <CategoryTab />
+        <CategoryButtons />
       </div>
     )
   }
