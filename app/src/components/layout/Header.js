@@ -6,6 +6,7 @@ import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
+import Icon from 'material-ui/Icon'
 
 const styles = theme => ({
   root: {
@@ -21,6 +22,10 @@ const styles = theme => ({
     margin: theme.spacing.unit,
     float: 'right',
   },
+  iconStyles: {
+    paddingLeft: 10,
+    fontSize: 18,
+  },
 })
 
 function Header(props) {
@@ -29,16 +34,17 @@ function Header(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="default">
+      <AppBar position="static" color="primary">
         <Toolbar>
           <Link className={classes.flex} to="/">
-            <Typography type="title" >
+            <Typography type="title" style={{ color: 'white' }}>
               Readable
             </Typography>
           </Link>
-          <Link className={classes.button} to="/new">
-            <Button color="accent">
+          <Link className={classes.button} to="/posts/new">
+            <Button style={{ color: 'white' }}>
               New Post
+              <Icon className={classes.iconStyles}>create</Icon>
             </Button>
           </Link>
         </Toolbar>
