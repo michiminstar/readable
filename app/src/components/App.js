@@ -2,8 +2,19 @@ import React, { Component } from 'react'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getCategories } from '../actions'
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
+import { amber, lightBlue } from 'material-ui/colors'
+
 import Header from './layout/Header'
 import Home from './Home'
+import NewPost from './NewPost'
+
+const theme = createMuiTheme({
+  palette: {
+    primary: amber,
+    secondary: lightBlue,
+  },
+})
 
 class App extends Component {
   componentDidMount() {
@@ -12,13 +23,16 @@ class App extends Component {
 
   render() {
     return (
-      <div className="app">
-        <Header />
-        <Switch>
-          <Route exact path="/" component={Home} />
-        </Switch>
-
-      </div>
+      <MuiThemeProvider theme={theme}>
+        <div className="app">
+          <Header />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/:category" component={Home} />
+            <Route exact path="/posts/new" component={NewPost} />
+          </Switch>
+        </div>
+      </MuiThemeProvider>
     )
   }
 }
