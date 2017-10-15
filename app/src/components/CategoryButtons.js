@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
@@ -9,9 +10,8 @@ import amber from 'material-ui/colors/amber'
 import Button from 'material-ui/Button'
 
 const styles = theme => ({
-  root: {
-    marginTop: 20,
-    textAlign: 'center',
+  container: {
+    marginTop: 30,
   },
   button: {
     margin: theme.spacing.unit,
@@ -25,15 +25,16 @@ class CategoryButtons extends Component {
     const { classes, categories } = this.props
 
     return (
-      <div className={classes.root}>
+      <div className={classes.container}>
         {categories && categories.map(category => (
-          <Button
-            key={category.name}
-            color='primary'
-            className={classes.button}
-            >
-              {category.name}
-          </Button>
+          <Link key={category.name} to={`/${category.path}`}>
+            <Button
+              color='primary'
+              className={classes.button}
+              >
+                {category.name}
+            </Button>
+          </Link>
         ))}
       </div>
     )
