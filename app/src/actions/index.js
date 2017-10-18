@@ -8,3 +8,24 @@ export const getCategories = () => dispatch =>
       categories
     })
   )
+
+export const getPosts = () => {
+  return (dispatch) => {
+    API.getPosts().then(posts => {
+      dispatch({
+        type: Types.LOAD_POSTS,
+        posts})
+    })
+  }
+}
+
+export const getPostsByCategory = (category) => {
+  return (dispatch) => {
+    API.getPostsByCategory(category).then(posts => {
+      dispatch({
+        type: Types.LOAD_POSTS_BY_CATEGORY,
+        posts
+      })
+    })
+  }
+}

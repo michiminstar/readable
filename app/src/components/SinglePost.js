@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { formatTimestamp } from '../utils/helper'
 
 import { withStyles } from 'material-ui/styles'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
@@ -11,6 +14,7 @@ import Icon from 'material-ui/Icon'
 const styles = theme => ({
   card: {
     minWidth: 275,
+    minHeight: 320,
   },
   subHeading: {
     marginBottom: 16,
@@ -25,47 +29,56 @@ const styles = theme => ({
     marginTop: 20,
     marginBottom: 15,
   },
+  iconPosition: {
+    position: 'absolute',
+    bottom: 25,
+  },
 })
 
-function SinglePost(props) {
-  const classes = props.classes
+class SinglePost extends Component {
+  render() {
+    const { classes, post } = this.props
 
-  return (
-    <div>
-      <Card className={classes.card}>
-        <CardContent>
-          <Typography type="body1" className={classes.subHeading}>
-            Thursday, July 14th 2016
-          </Typography>
-          <Typography type="headline" component="h2">
-            <Link to={'/'}>Title</Link>
-          </Typography>
-          <Typography type="body2" className={classes.author}>
-            by author
-          </Typography>
-          <Typography component="p" className={classes.bodyContent}>
-            This is the post content.
-          </Typography>
-          <Typography type="body1">
-            0 comment
-          </Typography>
-        </CardContent>
+    return (
+      <div>
+        <Card className={classes.card}>
+          <CardContent>
+            <Typography type="body1" className={classes.subHeading}>
+              {formatTimestamp(post.timestamp)}
+            </Typography>
+            <Typography type="headline" component="h2">
+              <Link to={`/${post.category}/${post.id}`}>{post.title}</Link>
+            </Typography>
+            <Typography type="body2" className={classes.author}>
+              {post.author}
+            </Typography>
+            <Typography component="p" className={classes.bodyContent}>
+              {post.body}
+            </Typography>
+            <Typography type="body1">
+              0 comment
+            </Typography>
+          </CardContent>
 
-        <CardActions disableActionSpacing>
-          <IconButton aria-label="Upvote">
-            <Icon>sentiment_very_satisfied</Icon>
-          </IconButton>
-          <IconButton aria-label="Downvote">
-            <Icon>sentiment_dissatisfied</Icon>
-          </IconButton>
-        </CardActions>
-      </Card>
-    </div>
-  )
+          <CardActions disableActionSpacing className={classes.iconPosition}>
+            <IconButton aria-label="Upvote">
+              <Icon>sentiment_very_satisfied</Icon>
+            </IconButton>
+            <IconButton aria-label="Downvote">
+              <Icon>sentiment_dissatisfied</Icon>
+            </IconButton>
+          </CardActions>
+        </Card>
+      </div>
+    )
+  }
 }
 
 SinglePost.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(SinglePost)
+export default compose(
+  withStyles(styles),
+  connect(null)
+)(SinglePost)

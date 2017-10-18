@@ -1,14 +1,9 @@
+import { combineReducers } from 'redux'
 import * as Types from '../actions/constants'
+import categories from './categories'
+import posts from './posts'
 
-function categories(state = [], action) {
-  const { categories } = action
-
-  switch (action.type) {
-    case Types.LOAD_CATEGORIES:
-      return categories
-    default:
-      return state
-  }
-}
-
-export default categories
+export default combineReducers({
+  categories,
+  posts
+})
