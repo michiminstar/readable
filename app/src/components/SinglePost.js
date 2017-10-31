@@ -14,9 +14,10 @@ import Icon from 'material-ui/Icon'
 const styles = theme => ({
   card: {
     minWidth: 275,
-    minHeight: 320,
+    height: 340,
   },
   subHeading: {
+    marginTop: 10,
     marginBottom: 16,
     fontSize: 13,
     color: theme.palette.text.secondary,
@@ -29,9 +30,13 @@ const styles = theme => ({
     marginTop: 20,
     marginBottom: 15,
   },
-  iconPosition: {
-    position: 'absolute',
-    bottom: 25,
+  iconPositionLeft: {
+    marginTop: 30,
+    display: 'inline-block',
+  },
+  iconPositionRight: {
+    marginTop: 30,
+    float: 'right',
   },
 })
 
@@ -60,7 +65,7 @@ class SinglePost extends Component {
             </Typography>
           </CardContent>
 
-          <CardActions disableActionSpacing className={classes.iconPosition}>
+          <CardActions disableActionSpacing className={classes.iconPositionLeft}>
             <IconButton aria-label="Upvote">
               <Icon>sentiment_very_satisfied</Icon>
             </IconButton>
