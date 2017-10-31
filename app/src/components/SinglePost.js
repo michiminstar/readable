@@ -84,9 +84,11 @@ class SinglePost extends Component {
           </CardActions>
 
           <CardActions disableActionSpacing className={classes.iconPositionRight}>
-            <IconButton aria-label="Edit">
-              <Icon>mode_edit</Icon>
-            </IconButton>
+            <Link to={`/${post.category}/${post.id}/edit`}>
+              <IconButton aria-label="Edit">
+                <Icon>mode_edit</Icon>
+              </IconButton>
+            </Link>
             <IconButton aria-label="Delete" onClick={(e) => this.onDelete(e)}>
               <Icon>delete</Icon>
             </IconButton>
