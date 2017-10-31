@@ -30,6 +30,16 @@ export const getPostsByCategory = (category) => {
     })
   }
 }
+
+export const createPost = (post, callback) => {
+  return (dispatch) => {
+    API.addPost(post).then(() => callback())
+    dispatch({
+      type: Types.ADD_POST,
+      post
+    })
+  }
+}
 export const deletePost = postId => dispatch =>
   API.deletePost(postId).then(post =>
     dispatch({
