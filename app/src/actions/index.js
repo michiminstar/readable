@@ -40,6 +40,15 @@ export const createPost = (post, callback) => {
     })
   }
 }
+
+export const editPost = (postId, title, body, callback) => {
+  return (dispatch) => {
+    API.editPost(postId, title, body).then(updatedPost => {
+      dispatch({ type: Types.EDIT_POST, updatedPost, postId })
+    }).then(() => callback())
+  }
+}
+
 export const deletePost = postId => dispatch =>
   API.deletePost(postId).then(post =>
     dispatch({
