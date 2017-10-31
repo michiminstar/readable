@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
+import { getPosts, deletePost } from '../actions'
 import { formatTimestamp } from '../utils/helper'
 
 import { withStyles } from 'material-ui/styles'
@@ -41,6 +42,14 @@ const styles = theme => ({
 })
 
 class SinglePost extends Component {
+  componentDidMount() {
+    this.props.getPosts()
+  }
+
+  onDelete = () => {
+    this.props.deletePost(this.props.post.id)
+  }
+
   render() {
     const { classes, post } = this.props
 
@@ -73,6 +82,15 @@ class SinglePost extends Component {
               <Icon>sentiment_dissatisfied</Icon>
             </IconButton>
           </CardActions>
+
+          <CardActions disableActionSpacing className={classes.iconPositionRight}>
+            <IconButton aria-label="Edit">
+              <Icon>mode_edit</Icon>
+            </IconButton>
+            <IconButton aria-label="Delete" onClick={(e) => this.onDelete(e)}>
+              <Icon>delete</Icon>
+            </IconButton>
+          </CardActions>
         </Card>
       </div>
     )
@@ -83,7 +101,16 @@ SinglePost.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
+function mapDispatchToProps (dispatch) {
+  return {
+    deletePost: (postId) => dispatch(deletePost(postId))
+  }
+}
+
 export default compose(
   withStyles(styles),
-  connect(null)
+  connect(mapDispatchToProps, {
+    getPosts,
+    deletePost,
+  })
 )(SinglePost)

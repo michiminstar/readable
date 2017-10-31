@@ -14,7 +14,8 @@ export const getPosts = () => {
     API.getPosts().then(posts => {
       dispatch({
         type: Types.LOAD_POSTS,
-        posts})
+        posts
+      })
     })
   }
 }
@@ -29,3 +30,10 @@ export const getPostsByCategory = (category) => {
     })
   }
 }
+export const deletePost = postId => dispatch =>
+  API.deletePost(postId).then(post =>
+    dispatch({
+      type: Types.DELETE_POST,
+      postId
+    })
+  )
