@@ -55,6 +55,7 @@ class NewPost extends Component {
       id: generateID(),
       timestamp: Date.now(),
       title: e.target.title.value,
+      body: e.target.content.value,
       author: e.target.author.value,
       category: e.target.category.value,
     }
