@@ -8,7 +8,6 @@ import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
 import TextField from 'material-ui/TextField'
-import Input, { InputLabel } from 'material-ui/Input'
 import Button from 'material-ui/Button'
 
 const styles = theme => ({
