@@ -17,6 +17,9 @@ const styles = theme => ({
     minWidth: 275,
     height: 340,
   },
+  contentHeight: {
+    height: 220,
+  },
   subHeading: {
     marginTop: 10,
     marginBottom: 16,
@@ -56,7 +59,7 @@ class SinglePost extends Component {
     return (
       <div>
         <Card className={classes.card}>
-          <CardContent>
+          <CardContent className={classes.contentHeight}>
             <Typography type="body1" className={classes.subHeading}>
               {formatTimestamp(post.timestamp)}
             </Typography>
