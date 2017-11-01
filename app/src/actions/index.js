@@ -81,3 +81,14 @@ export const downVotePost = (postId, option) => {
   }
 }
 
+export const getPostComments = (parentId) => {
+  return (dispatch) => {
+    API.getPostComments(parentId).then(comments => {
+      dispatch({
+        type: Types.LOAD_COMMENTS,
+        parentId,
+        comments
+      })
+    })
+  }
+}

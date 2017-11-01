@@ -3,8 +3,14 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import { getPosts, deletePost, upVotePost, downVotePost } from '../actions'
 import { formatTimestamp } from '../utils/helper'
+import {
+  getPosts,
+  deletePost,
+  upVotePost,
+  downVotePost,
+  getPostComments,
+} from '../actions'
 
 import { withStyles } from 'material-ui/styles'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
@@ -47,6 +53,7 @@ const styles = theme => ({
 class SinglePost extends Component {
   componentDidMount() {
     this.props.getPosts()
+    this.props.getPostComments(this.props.post.id)
   }
 
   onDelete = () => {
@@ -65,7 +72,7 @@ class SinglePost extends Component {
 
 
   render() {
-    const { classes, post } = this.props
+    const { classes, post, comments } = this.props
 
     return (
       <div>
@@ -84,7 +91,7 @@ class SinglePost extends Component {
               {post.body}
             </Typography>
             <Typography type="body1">
-              0 comment
+              {comments && comments ? comments.length : 0} comments
             </Typography>
             <Typography type="body1">
               {post.voteScore} votes
@@ -120,18 +127,19 @@ SinglePost.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-function mapDispatchToProps (dispatch) {
+function mapStateToProps({ comments }, { post }) {
   return {
-    deletePost: (postId) => dispatch(deletePost(postId))
+    comments: comments[post.id]
   }
 }
 
 export default compose(
   withStyles(styles),
-  connect(mapDispatchToProps, {
+  connect(mapStateToProps, {
     getPosts,
     deletePost,
     upVotePost,
     downVotePost,
+    getPostComments,
   })
 )(SinglePost)
