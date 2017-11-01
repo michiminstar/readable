@@ -56,3 +56,28 @@ export const deletePost = postId => dispatch =>
       postId
     })
   )
+
+export const upVotePost = (postId, option) => {
+  return (dispatch) => {
+    API.votePost(postId, option).then(post => {
+      dispatch({
+        type: Types.UPVOTE_POST,
+        postId,
+        option: 'upVote'
+      })
+    })
+  }
+}
+
+export const downVotePost = (postId, option) => {
+  return (dispatch) => {
+    API.votePost(postId, option).then(post => {
+      dispatch({
+        type: Types.DOWNVOTE_POST,
+        postId,
+        option: 'downVote'
+      })
+    })
+  }
+}
+

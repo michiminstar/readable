@@ -17,6 +17,24 @@ function posts(state = [], action) {
       })
     case Types.DELETE_POST:
       return state.filter(post => post.id !== postId)
+    case Types.UPVOTE_POST:
+      return state.map(post => {
+        if (post.id === action.postId) {
+          if (action.option === "upVote") {
+            post.voteScore++
+          }
+        }
+        return post
+      })
+    case Types.DOWNVOTE_POST:
+      return state.map(post => {
+        if (post.id === action.postId) {
+          if (action.option === "downVote") {
+            post.voteScore--
+          }
+        }
+        return post
+      })
     default:
       return state
   }

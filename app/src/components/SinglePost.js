@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import { getPosts, deletePost } from '../actions'
+import { getPosts, deletePost, upVotePost, downVotePost } from '../actions'
 import { formatTimestamp } from '../utils/helper'
 
 import { withStyles } from 'material-ui/styles'
@@ -53,6 +53,17 @@ class SinglePost extends Component {
     this.props.deletePost(this.props.post.id)
   }
 
+  onUpvote = () => {
+    this.props.upVotePost(this.props.post.id)
+    getPosts()
+  }
+
+  onDownvote = () => {
+    this.props.downVotePost(this.props.post.id)
+    getPosts()
+  }
+
+
   render() {
     const { classes, post } = this.props
 
@@ -75,13 +86,16 @@ class SinglePost extends Component {
             <Typography type="body1">
               0 comment
             </Typography>
+            <Typography type="body1">
+              {post.voteScore} votes
+            </Typography>
           </CardContent>
 
           <CardActions disableActionSpacing className={classes.iconPositionLeft}>
-            <IconButton aria-label="Upvote">
+            <IconButton aria-label="Upvote" onClick={(e) => this.onUpvote(e)}>
               <Icon>sentiment_very_satisfied</Icon>
             </IconButton>
-            <IconButton aria-label="Downvote">
+            <IconButton aria-label="Downvote" onClick={(e) => this.onDownvote(e)}>
               <Icon>sentiment_dissatisfied</Icon>
             </IconButton>
           </CardActions>
@@ -117,5 +131,7 @@ export default compose(
   connect(mapDispatchToProps, {
     getPosts,
     deletePost,
+    upVotePost,
+    downVotePost,
   })
 )(SinglePost)
