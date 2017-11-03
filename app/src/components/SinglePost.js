@@ -60,19 +60,8 @@ class SinglePost extends Component {
     this.props.deletePost(this.props.post.id)
   }
 
-  onUpvote = () => {
-    this.props.upVotePost(this.props.post.id)
-    getPosts()
-  }
-
-  onDownvote = () => {
-    this.props.downVotePost(this.props.post.id)
-    getPosts()
-  }
-
-
   render() {
-    const { classes, post, comments } = this.props
+    const { classes, post, comments, getPosts, upVotePost, downVotePost } = this.props
 
     return (
       <div>
@@ -99,10 +88,20 @@ class SinglePost extends Component {
           </CardContent>
 
           <CardActions disableActionSpacing className={classes.iconPositionLeft}>
-            <IconButton aria-label="Upvote" onClick={(e) => this.onUpvote(e)}>
+            <IconButton
+              aria-label="Upvote"
+              onClick={() => {
+                upVotePost(post.id, "upVote")
+                getPosts()
+              }}>
               <Icon>sentiment_very_satisfied</Icon>
             </IconButton>
-            <IconButton aria-label="Downvote" onClick={(e) => this.onDownvote(e)}>
+            <IconButton
+              aria-label="Downvote"
+              onClick={() => {
+                downVotePost(post.id, "downVote")
+                getPosts()
+              }}>
               <Icon>sentiment_dissatisfied</Icon>
             </IconButton>
           </CardActions>
