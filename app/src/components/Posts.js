@@ -31,8 +31,8 @@ class Posts extends Component {
           </Grid>
 
           {posts.map(post => (
-            <Grid item xs={12} sm={6} md={4}>
-              <SinglePost key={post.id} post={post} />
+            <Grid item xs={12} sm={6} md={4} key={post.id}>
+              <SinglePost post={post} />
             </Grid>
           ))}
         </Grid>
