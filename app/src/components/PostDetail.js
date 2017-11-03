@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
+import { Link } from 'react-router-dom'
 import _ from 'lodash'
 import {
   getPosts,
@@ -15,7 +16,7 @@ import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 import SinglePost from './SinglePost'
 import SingleComment from './SingleComment'
-import NewComment from './NewComment'
+import Button from 'material-ui/Button'
 
 const styles = theme => ({
   cardContainer: {
@@ -23,6 +24,13 @@ const styles = theme => ({
     justifyContent: 'center',
     maxWidth: 720,
     margin: '40px auto',
+  },
+  button: {
+    color: 'white',
+    float: 'right',
+  },
+  alignLeft: {
+    display: 'inline-block',
   },
 })
 
@@ -48,11 +56,24 @@ class PostDetail extends Component {
             </Grid>
 
             <Grid container spacing={24} className={classes.cardContainer}>
-              <Typography type="headline" component="h4">
-                Comments
-              </Typography>
-
-              <NewComment />
+              <div>
+                <Typography
+                  type="headline"
+                  component="h4"
+                  className={classes.alignLeft}
+                  >
+                  Comments
+                </Typography>
+                <Link to={`/${post.category}/${post.id}/comment`}>
+                  <Button
+                    raised color="accent"
+                    className={classes.button}
+                    type='submit'
+                    >
+                    New Comment
+                  </Button>
+                </Link>
+              </div>
 
               {comments &&
                 <SingleComment

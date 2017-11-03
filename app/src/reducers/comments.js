@@ -9,6 +9,12 @@ function comments(state = {}, action) {
         ...state,
         [parentId]: comments
       }
+    case Types.ADD_COMMENT:
+      console.log('NEW COMMENT', action.comments)
+      return {
+        ...state,
+        [parentId]: comments
+      }
     case Types.UPVOTE_COMMENT:
       return {
         ...state,
@@ -33,6 +39,8 @@ function comments(state = {}, action) {
           return comment
         })
       }
+    case Types.DELETE_COMMENT:
+      return state
     default:
       return state
   }

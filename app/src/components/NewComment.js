@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { addPostComment } from '../actions'
+import { generateID } from '../utils/helper'
 
 import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
 import TextField from 'material-ui/TextField'
-import Input, { InputLabel } from 'material-ui/Input'
-import { MenuItem } from 'material-ui/Menu'
-import { FormControl } from 'material-ui/Form'
-import Select from 'material-ui/Select'
 import Button from 'material-ui/Button'
 
 const styles = theme => ({
   formContainer: theme.mixins.gutters({
-    width: 'inherit',
+    width: 500,
     paddingTop: 16,
     paddingBottom: 16,
     marginTop: theme.spacing.unit * 3,
@@ -35,11 +35,39 @@ const styles = theme => ({
 })
 
 class NewComment extends Component {
+
+  submitComment = (e) => {
+    e.preventDefault()
+
+    const postId = this.props.match.params.postId
+
+    const newComment = {
+      id: generateID(),
+      timestamp: Date.now(),
+      parentId: postId,
+      author: e.target.author.value,
+      body: e.target.comment.value,
+    }
+
+    this.props.addPostComment(
+      newComment,
+      postId,
+      () => this.props.history.push(`/post/${postId}`)
+    )
+  }
+
   render() {
     const { classes } = this.props
 
     return (
-      <form>
+      <form className='container' onSubmit={this.submitComment}>
+        <Typography
+          type="headline"
+          component="h1"
+          className={classes.headline}>
+          New Comment
+        </Typography>
+
         <Paper className={classes.formContainer} elevation={4}>
           <TextField
             label='Name'
@@ -66,7 +94,7 @@ class NewComment extends Component {
             className={classes.button}
             type='submit'
             >
-            Post
+            Submit
           </Button>
         </Paper>
       </form>
@@ -74,4 +102,9 @@ class NewComment extends Component {
   }
 }
 
-export default withStyles(styles)(NewComment)
+export default compose(
+  withStyles(styles),
+  connect(null, {
+    addPostComment
+  })
+)(NewComment)

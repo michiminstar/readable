@@ -44,7 +44,11 @@ export const createPost = (post, callback) => {
 export const editPost = (postId, title, body, callback) => {
   return (dispatch) => {
     API.editPost(postId, title, body).then(updatedPost => {
-      dispatch({ type: Types.EDIT_POST, updatedPost, postId })
+      dispatch({
+        type: Types.EDIT_POST,
+        updatedPost,
+        postId
+      })
     }).then(() => callback())
   }
 }
@@ -89,6 +93,28 @@ export const getPostComments = (parentId) => {
         parentId,
         comments
       })
+    })
+  }
+}
+
+export const addPostComment = (comment, parentId, callback) => {
+  return (dispatch) => {
+    API.addPostComment(comment).then(comment => {
+      dispatch({
+        type: Types.ADD_COMMENT,
+        parentId,
+        comment
+      })
+    }).then(() => callback())
+  }
+}
+
+export const deletePostComment = (commentId, callback) => {
+  return (dispatch) => {
+    API.deletePostComment(commentId).then(() => callback())
+    dispatch({
+      type: Types.DELETE_COMMENT,
+      commentId
     })
   }
 }
