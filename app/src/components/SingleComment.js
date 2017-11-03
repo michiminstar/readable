@@ -3,7 +3,12 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { formatTimestamp } from '../utils/helper'
-import { getPostComments, upVoteComment, downVoteComment } from '../actions'
+import {
+  getPostComments,
+  upVoteComment,
+  downVoteComment,
+  deletePostComment
+} from '../actions'
 
 import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
@@ -38,14 +43,23 @@ const styles = theme => ({
 })
 
 class SingleComment extends Component {
+
+  onDelete = (comment) => {
+    let parentId = comment.parentId
+    this.props.deletePostComment(comment.id, () => {
+      this.props.history.push(`/post/${parentId}`)
+      this.props.getPostComments(comment.parentId)
+    })
+  }
+
   render() {
-    const { classes } = this.props
+    const { classes, category } = this.props
 
     return (
       <div className={classes.cardContainer}>
         {this.props.comments.map(comment => (
-          <div>
-            <div key={comment.id} className={classes.alignLeft}>
+          <div key={comment.id}>
+            <div className={classes.alignLeft}>
               <Typography component="p" className={classes.bodyContent}>
                 {comment.body}
               </Typography>
@@ -73,12 +87,12 @@ class SingleComment extends Component {
             </div>
 
             <div className={classes.alignRight}>
-              <Link to={`/${comment.category}/${comment.id}/edit`}>
+              <Link to={`/${category}/${comment.parentId}/${comment.id}/edit`}>
                 <IconButton aria-label="Edit">
                   <Icon>mode_edit</Icon>
                 </IconButton>
               </Link>
-              <IconButton aria-label="Delete" onClick={(e) => this.onDelete(e)}>
+              <IconButton aria-label="Delete" onClick={() => this.onDelete(comment)}>
                 <Icon>delete</Icon>
               </IconButton>
             </div>
@@ -96,5 +110,6 @@ export default compose(
     getPostComments,
     upVoteComment,
     downVoteComment,
+    deletePostComment,
   })
 )(SingleComment)

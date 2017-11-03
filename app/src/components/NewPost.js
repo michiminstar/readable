@@ -63,7 +63,6 @@ class NewPost extends Component {
     this.props.createPost(newPost, () => this.props.history.push('/'))
   }
 
-
   handleChange = category => event => {
     this.setState({ [category]: event.target.value })
   }
@@ -144,8 +143,8 @@ NewPost.propTypes = {
 
 function mapStateToProps({ posts, categories }) {
   return {
-    posts: posts,
-    categories: categories
+    posts,
+    categories
   }
 }
 
