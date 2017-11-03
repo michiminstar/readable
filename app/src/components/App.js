@@ -11,6 +11,7 @@ import PostDetail from './PostDetail'
 import NewPost from './NewPost'
 import EditPost from './EditPost'
 import NewComment from './NewComment'
+import EditComment from './EditComment'
 
 const theme = createMuiTheme({
   palette: {
@@ -36,6 +37,7 @@ class App extends Component {
             <Route exact path="/:category/:postId" component={PostDetail} />
             <Route path="/:category/:postId/edit" component={EditPost} />
             <Route path="/:category/:postId/comment" component={NewComment} />
+            <Route path="/:category/:postId/:commentId/edit" component={EditComment} />
           </Switch>
         </div>
       </MuiThemeProvider>

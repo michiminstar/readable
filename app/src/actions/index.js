@@ -109,6 +109,19 @@ export const addPostComment = (comment, parentId, callback) => {
   }
 }
 
+export const editComment = (commentId, parentId, timestamp, body, callback) => {
+  return (dispatch) => {
+    API.editComment(commentId, body, timestamp).then(updatedComment => {
+        dispatch({
+          type: Types.EDIT_COMMENT,
+          updatedComment,
+          commentId,
+          parentId
+        })
+      }).then(() => callback())
+  }
+}
+
 export const deletePostComment = (commentId, callback) => {
   return (dispatch) => {
     API.deletePostComment(commentId).then(() => callback())

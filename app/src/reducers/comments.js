@@ -1,7 +1,7 @@
 import * as Types from '../actions/constants'
 
 function comments(state = {}, action) {
-  const { comments, commentId, parentId, option } = action
+  const { comments, commentId, parentId, option, updatedComment } = action
 
   switch(action.type) {
     case Types.LOAD_COMMENTS:
@@ -15,6 +15,18 @@ function comments(state = {}, action) {
         ...state,
         [parentId]: comments
       }
+    case Types.EDIT_COMMENT:
+      return {
+        ...state,
+        [parentId]: state[parentId].map(comment => {
+          if(comment.id === commentId) {
+            comment = updatedComment
+          }
+          return comment
+        })
+      }
+    case Types.DELETE_COMMENT:
+      return state
     case Types.UPVOTE_COMMENT:
       return {
         ...state,
@@ -39,8 +51,6 @@ function comments(state = {}, action) {
           return comment
         })
       }
-    case Types.DELETE_COMMENT:
-      return state
     default:
       return state
   }
