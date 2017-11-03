@@ -6,7 +6,7 @@ import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 import { amber, lightBlue } from 'material-ui/colors'
 
 import Header from './layout/Header'
-import Home from './Home'
+import Posts from './Posts'
 import NewPost from './NewPost'
 import EditPost from './EditPost'
 
@@ -28,9 +28,9 @@ class App extends Component {
         <div className="app">
           <Header />
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={Posts} />
             <Route exact path="/posts/new" component={NewPost} />
-            <Route exact path="/:category" component={Home} />
+            <Route exact path="/:category" component={Posts} />
             <Route path="/:category/:postId/edit" component={EditPost} />
           </Switch>
         </div>

@@ -8,7 +8,7 @@ import CategoryButtons from './CategoryButtons'
 import SortPosts from './SortPosts'
 import SinglePost from './SinglePost'
 
-class Home extends Component {
+class Posts extends Component {
   static propTypes = {
     posts: PropTypes.array
   }
@@ -50,4 +50,4 @@ function mapStateToProps({ posts }, { match }) {
 
 export default connect(mapStateToProps, {
   getPosts
-})(Home)
+})(Posts)
