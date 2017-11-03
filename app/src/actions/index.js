@@ -85,6 +85,15 @@ export const downVotePost = (postId, option) => {
   }
 }
 
+export const sortPost = (sortKey) => {
+  return dispatch => {
+    dispatch({
+      type: Types.SORT_POST,
+      sortKey
+    })
+  }
+}
+
 export const getPostComments = (parentId) => {
   return (dispatch) => {
     API.getPostComments(parentId).then(comments => {

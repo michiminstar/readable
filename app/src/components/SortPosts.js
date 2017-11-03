@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { sortPost } from '../actions'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
 
 import { withStyles } from 'material-ui/styles'
 import Input, { InputLabel } from 'material-ui/Input'
@@ -26,8 +29,11 @@ class SortPosts extends Component {
     sortPost: '',
   }
 
-  handleChange = sortPost => event => {
-    this.setState({ [sortPost]: event.target.value })
+  sortPost = (e) => {
+    let data = {}
+    data.value = e.target.value
+
+    this.props.sortPost(data.value)
   }
 
   render() {
@@ -39,11 +45,11 @@ class SortPosts extends Component {
           <InputLabel htmlFor="sortPost">Sort by...</InputLabel>
           <Select
             value={this.state.sortPost}
-            onChange={this.handleChange('sortPost')}
+            onChange={(e) => this.sortPost(e)}
             input={<Input id="sortPost" />}
           >
-            <MenuItem value="time">Time</MenuItem>
-            <MenuItem value="score">Vote score</MenuItem>
+            <MenuItem value="timestamp">Time</MenuItem>
+            <MenuItem value="voteScore">Vote score</MenuItem>
           </Select>
         </FormControl>
       </form>
@@ -55,4 +61,9 @@ SortPosts.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(SortPosts)
+export default compose(
+  withStyles(styles),
+  connect(null, {
+    sortPost
+  })
+)(SortPosts)

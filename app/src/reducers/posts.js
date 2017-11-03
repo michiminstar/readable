@@ -1,7 +1,8 @@
 import * as Types from '../actions/constants'
+import sortBy from 'sort-by'
 
 function posts(state = [], action) {
-  const { posts, post, postId, updatedPost } = action
+  const { posts, post, postId, updatedPost, sortKey } = action
 
   switch (action.type) {
     case Types.LOAD_POSTS:
@@ -35,6 +36,8 @@ function posts(state = [], action) {
         }
         return post
       })
+    case Types.SORT_POST:
+      return [].concat(state.sort(sortBy("-"+sortKey)))
     default:
       return state
   }
