@@ -7,6 +7,7 @@ import { amber, lightBlue } from 'material-ui/colors'
 
 import Header from './layout/Header'
 import Posts from './Posts'
+import PostDetail from './PostDetail'
 import NewPost from './NewPost'
 import EditPost from './EditPost'
 
@@ -31,6 +32,7 @@ class App extends Component {
             <Route exact path="/" component={Posts} />
             <Route exact path="/posts/new" component={NewPost} />
             <Route exact path="/:category" component={Posts} />
+            <Route exact path="/:category/:postId" component={PostDetail} />
             <Route path="/:category/:postId/edit" component={EditPost} />
           </Switch>
         </div>

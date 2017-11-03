@@ -32,7 +32,7 @@ class Posts extends Component {
 
           {posts.map(post => (
             <Grid item xs={12} sm={6} md={4}>
-              <SinglePost key={post.id} post={post}/>
+              <SinglePost key={post.id} post={post} />
             </Grid>
           ))}
         </Grid>
