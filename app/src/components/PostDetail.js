@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import _ from 'lodash'
@@ -15,7 +13,7 @@ import {
 import { withStyles } from 'material-ui/styles'
 import Grid from 'material-ui/Grid'
 import SinglePost from './SinglePost'
-// TODO: import comment here later
+import SingleComment from './SingleComment'
 
 const styles = theme => ({
   cardContainer: {
@@ -46,6 +44,8 @@ class PostDetail extends Component {
                 </Grid>
               </div>
             </Grid>
+
+            <SingleComment />
           </div>
         )}
       </div>
