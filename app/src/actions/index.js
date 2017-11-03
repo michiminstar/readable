@@ -92,3 +92,29 @@ export const getPostComments = (parentId) => {
     })
   }
 }
+
+export const upVoteComment = (commentId, parentId, option) => {
+  return (dispatch) => {
+    API.voteComment(commentId, option).then(comment => {
+      dispatch({
+        type: Types.UPVOTE_COMMENT,
+        commentId,
+        parentId,
+        option: 'upVote'
+      })
+    })
+  }
+}
+
+export const downVoteComment = (commentId, parentId, option) => {
+  return (dispatch) => {
+    API.voteComment(commentId, option).then(comment => {
+      dispatch({
+        type: Types.DOWNVOTE_COMMENT,
+        commentId,
+        parentId,
+        option: 'downVote'
+      })
+    })
+  }
+}
