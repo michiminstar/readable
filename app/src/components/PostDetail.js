@@ -12,8 +12,10 @@ import {
 
 import { withStyles } from 'material-ui/styles'
 import Grid from 'material-ui/Grid'
+import Typography from 'material-ui/Typography'
 import SinglePost from './SinglePost'
 import SingleComment from './SingleComment'
+import NewComment from './NewComment'
 
 const styles = theme => ({
   cardContainer: {
@@ -31,7 +33,7 @@ class PostDetail extends Component {
   }
 
   render() {
-    const { classes, post, postId, comments } = this.props
+    const { classes, post, comments } = this.props
 
     return (
       <div>
@@ -45,7 +47,21 @@ class PostDetail extends Component {
               </div>
             </Grid>
 
-            <SingleComment />
+            <Grid container spacing={24} className={classes.cardContainer}>
+              <Typography type="headline" component="h4">
+                Comments
+              </Typography>
+
+              <NewComment />
+
+              {comments &&
+                <SingleComment
+                  category={post.category}
+                  comments={comments}
+                  history={this.props.history}
+                />}
+            </Grid>
+
           </div>
         )}
       </div>
@@ -62,7 +78,6 @@ function mapStateToProps({ posts, comments }, { match }) {
     comments: comments[match.params.postId]
   }
 }
-
 
 export default compose(
   withStyles(styles),
