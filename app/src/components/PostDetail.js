@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import _ from 'lodash'
 import {
   getPosts,
-  deletePost,
   upVotePost,
   downVotePost,
 } from '../actions/postActions'
@@ -32,6 +31,11 @@ const styles = theme => ({
   alignLeft: {
     display: 'inline-block',
   },
+  alignCenter: {
+    maxWidth: 720,
+    margin: '60px auto',
+    textAlign: 'center',
+  }
 })
 
 class PostDetail extends Component {
@@ -42,16 +46,29 @@ class PostDetail extends Component {
 
   render() {
     const { classes, post, comments, history } = this.props
-    const { id, category } = post
+
+    if(!post) {
+      return (
+        <div>
+          <Typography
+            type="headline"
+            component="h4"
+            className={classes.alignCenter}
+            >
+            404 Post Not Found
+          </Typography>
+        </div>
+      )
+    }
 
     return (
       <div>
         {post && (
           <div className='container'>
             <Grid container spacing={24} className={classes.cardContainer}>
-              <div key={id}>
+              <div key={post.id}>
                 <Grid item xs={12}>
-                  <SinglePost key={id} post={post} />
+                  <SinglePost key={post.id} post={post} />
                 </Grid>
               </div>
             </Grid>
@@ -65,7 +82,7 @@ class PostDetail extends Component {
                   >
                   Comments
                 </Typography>
-                <Link to={`/${category}/${id}/comment`}>
+                <Link to={`/${post.category}/${post.id}/comment`}>
                   <Button
                     raised color="accent"
                     className={classes.button}
@@ -78,7 +95,7 @@ class PostDetail extends Component {
 
               {comments &&
                 <SingleComment
-                  category={category}
+                  category={post.category}
                   comments={comments}
                   history={history}
                 />}
@@ -105,7 +122,6 @@ export default compose(
   withStyles(styles),
   connect(mapStateToProps, {
     getPosts,
-    deletePost,
     upVotePost,
     downVotePost,
     getPostComments,
