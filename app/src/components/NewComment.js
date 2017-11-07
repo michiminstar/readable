@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import { addPostComment } from '../actions'
+import { addPostComment } from '../actions/commentActions'
 import { generateID } from '../utils/helper'
 
 import { withStyles } from 'material-ui/styles'

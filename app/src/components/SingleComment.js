@@ -8,7 +8,7 @@ import {
   upVoteComment,
   downVoteComment,
   deletePostComment
-} from '../actions'
+} from '../actions/commentActions'
 
 import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'

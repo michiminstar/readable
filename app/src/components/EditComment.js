@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import { getPostComments, editComment } from '../actions'
+import { getPostComments, editComment } from '../actions/commentActions'
 import _ from 'lodash'
 
 import { withStyles } from 'material-ui/styles'

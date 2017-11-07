@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import { getCategories } from '../actions'
+import { getCategories } from '../actions/categoryActions'
 
 import { withStyles } from 'material-ui/styles'
 import amber from 'material-ui/colors/amber'

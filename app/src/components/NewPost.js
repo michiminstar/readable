@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import { createPost } from '../actions'
+import { createPost } from '../actions/postActions'
 import PropTypes from 'prop-types'
 import { generateID } from '../utils/helper'
 

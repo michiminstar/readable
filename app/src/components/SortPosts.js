@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { sortPost } from '../actions'
+import { sortPost } from '../actions/postActions'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 

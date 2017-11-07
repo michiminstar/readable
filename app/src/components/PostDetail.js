@@ -8,8 +8,8 @@ import {
   deletePost,
   upVotePost,
   downVotePost,
-  getPostComments,
-} from '../actions'
+} from '../actions/postActions'
+import { getPostComments } from '../actions/commentActions'
 
 import { withStyles } from 'material-ui/styles'
 import Grid from 'material-ui/Grid'

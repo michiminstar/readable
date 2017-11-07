@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getCategories } from '../actions'
+import { getCategories } from '../actions/categoryActions'
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 import { amber, lightBlue } from 'material-ui/colors'
 

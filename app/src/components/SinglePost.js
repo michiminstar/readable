@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { formatTimestamp } from '../utils/helper'
-import * as actions from '../actions'
+import { getPosts, deletePost, upVotePost, downVotePost} from '../actions/postActions'
+import { getPostComments } from '../actions/commentActions'
 
 import { withStyles } from 'material-ui/styles'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
@@ -128,5 +129,11 @@ function mapStateToProps({ comments }, { post }) {
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, actions)
+  connect(mapStateToProps, {
+    getPosts,
+    deletePost,
+    upVotePost,
+    downVotePost,
+    getPostComments,
+  })
 )(SinglePost)
