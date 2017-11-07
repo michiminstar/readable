@@ -41,16 +41,17 @@ class PostDetail extends Component {
   }
 
   render() {
-    const { classes, post, comments } = this.props
+    const { classes, post, comments, history } = this.props
+    const { id, category } = post
 
     return (
       <div>
         {post && (
           <div className='container'>
             <Grid container spacing={24} className={classes.cardContainer}>
-              <div key={post.id}>
+              <div key={id}>
                 <Grid item xs={12}>
-                  <SinglePost key={post.id} post={post} />
+                  <SinglePost key={id} post={post} />
                 </Grid>
               </div>
             </Grid>
@@ -64,7 +65,7 @@ class PostDetail extends Component {
                   >
                   Comments
                 </Typography>
-                <Link to={`/${post.category}/${post.id}/comment`}>
+                <Link to={`/${category}/${id}/comment`}>
                   <Button
                     raised color="accent"
                     className={classes.button}
@@ -77,9 +78,9 @@ class PostDetail extends Component {
 
               {comments &&
                 <SingleComment
-                  category={post.category}
+                  category={category}
                   comments={comments}
-                  history={this.props.history}
+                  history={history}
                 />}
             </Grid>
 

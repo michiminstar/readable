@@ -30,10 +30,7 @@ class SortPosts extends Component {
   }
 
   sortPost = (e) => {
-    let data = {}
-    data.value = e.target.value
-
-    this.props.sortPost(data.value)
+    this.props.sortPost(e.target.value)
   }
 
   render() {
