@@ -1,5 +1,3 @@
-// Actions - JavaScript objects that describe any event that should update the // application’s state
-
 export const LOAD_CATEGORIES = 'LOAD_CATEGORIES'
 
 export const LOAD_POSTS = 'LOAD_POSTS'
